@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}Blog{% endblock %}
+{% block content %}
+
+
+<div class="block-white">
+    <div class="blog container">
+        {% for post in posts %}
+        <div class="row">
+            <div class="col-xs-12">
+              <h6 class="info"> posted: <strong>{{ post.date }}</strong> | <a href="{{ url_for('view_markdown', slug=post.slug) }}">MD</a> </h6>
+              <h1 class="index-title"><a href="{{ url_for('view_post', slug=post.slug) }}">{{ post.title }}</a></h1>
+              {% if post.summary %}
+              <p class="bottom-small"> {{ post.summary|striptags|truncate }} </p>
+              {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-4 text-left">
+        <a href="{{ url_for('index')}}">Nic West</a>
+       </div>
+      <div class="col-xs-8 text-right">
+        <a href="{{ url_for('cv_display_temp')}}">CV</a>
+        <a href="https://twitter.com/west_nic" target="_blank">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a href="https://github.com/nicwest" target="_blank">
+          <i class="fa fa-github"></i>
+        </a>
+       </div>
+    </div>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='js/highlight.pack.js')}}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}
