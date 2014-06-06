@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}Blog{% endblock %}
+{% block content %}
+<div class="block-blue">
+    <div class="container full">
+      <h1 class="v-center">404</h1>
+    </div>
+</div>
+<div class="block-white">
+  <div class="container full">
+    <h6 class="v-center"><a href="{{ url_for('index')}}">take me <strong>home</strong></a></h6>
+  </div>
+</div>
+{% include "footer.html" %}
+{% endblock %}

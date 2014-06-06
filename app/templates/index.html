@@ -19,24 +19,7 @@
     </div>
 </div>
 
-<div class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-4 text-left">
-        <a href="{{ url_for('index')}}">Nic West</a>
-       </div>
-      <div class="col-xs-8 text-right">
-        <a href="{{ url_for('cv_display_temp')}}">CV</a>
-        <a href="https://twitter.com/west_nic" target="_blank">
-          <i class="fa fa-twitter"></i>
-        </a>
-        <a href="https://github.com/nicwest" target="_blank">
-          <i class="fa fa-github"></i>
-        </a>
-       </div>
-    </div>
-  </div>
-</div>
+{% include "footer.html" %}
 <script src="{{ url_for('static', filename='js/highlight.pack.js')}}"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 {% endblock %}

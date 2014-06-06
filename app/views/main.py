@@ -1,6 +1,7 @@
 import os
-from flask import Flask, render_template, Response
-#from feedgen.feed import FeedGenerator
+from urlparse import urljoin
+from flask import Flask, render_template, Response, request, url_for
+from werkzeug.contrib.atom import AtomFeed
 from app import app
 from app import posts
 
@@ -27,20 +28,25 @@ def view_markdown(slug):
         content = open(post.base_path, 'r').read()
         return Response(content, mimetype="text/x-markdown")
 
-@app.route('/rss/')
-def view_rss(slug):
-    fg = FeedGenerator()
-    fg.id('http://www.nic-west.com/')
-    fg.title('things')
-    fg.author( {'name':'Nic West','email':'nope@nada.com'} )
-    fg.link( href='http://www.nic-west.com/rss/', rel='self' )
-    fg.language('en')
-    rssfeed  = fg.rss_str(pretty=True)
-    return Response(rssfeed, mimetype="application/rss+xml")
+@app.route('/recent.atom')
+def view_atom():
+    feed = AtomFeed('Recent Articles',
+                    feed_url=request.url, url=request.url_root, author='Nic West')
+    for post in posts.posts:
+        post.make_html()
+        feed.add(post.title, post.content,
+                 content_type='html',
+                 url=urljoin(request.url_root, url_for('view_post', slug=post.slug)),
+                 updated=post.datetime,
+                 published=post.datetime)
+    resp = feed.get_response() 
+    return resp
 
 @app.route('/tags/')
 def view_tags():
-    return render_template('tags.html', tags=posts.tags.keys())
+    tags = [x for x in posts.tags.iteritems()]
+    tags.sort(key=lambda x: x[0])
+    return render_template('tags.html', tags=posts.tags.iteritems())
 
 @app.route('/tags/<tag>')
 def view_tag(tag):

@@ -1,4 +1,5 @@
 import os
+import datetime
 import markdown
 from app import app
 
@@ -29,18 +30,27 @@ class Post(object):
 
     @property
     def tags(self):
-        return self.tag_string.lower().split(' ')
+        return self.tag_string.lower().split(', ')
+
+    @property
+    def clean_tags(self):
+        tags = self.tags
+        return [x.replace('*', '') for x in tags]
+
+    @property
+    def datetime (self):
+        return datetime.datetime.strptime(self.date, '%Y-%m-%d %H:%M')
 
 #post list
 posts = [
-    Post('troll', 'fuubar lol', 'troll.md', 'I like camel', '2014-06-05 21:15',
-         tags='test something'),
     Post('test', 'Test Post Please Ignore', 'test.md',
          'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod' +
          'tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At' +
          'vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,' +
          'no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-         '2014-06-05 20:48', tags='test things'),
+         '2014-06-05 20:48', tags='test, **things'),
+    #Post('hello-world', 'Hello World', 'hello-world.md', 'first!', '2014-06-06 20:22',
+    #     tags='blog, *me')
 ]
 
 posts.sort(key=lambda x: x.date, reverse=True)
@@ -49,8 +59,14 @@ slugs = {x.slug: x for x in posts}
 tags = {}
 for post in posts:
     for tag in post.tags:
+        strong = False
+        if tag.startswith('**'):
+            strong = True
+            tag = tag[2:]
         if tag not in tags:
             tags[tag] = {'strong': False, 'posts': []}
         if post not in tags[tag]:
             tags[tag]['posts'].append(post)
-        
+        if strong:
+            tags[tag]['strong'] = True
+
