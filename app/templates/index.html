@@ -5,6 +5,11 @@
 
 <div class="block-white">
     <div class="blog container">
+        <div class="row">
+            <div class="col-xs-12">
+              <h6 class="info"> <strong>posts</strong> | <a href="{{ url_for('view_tags') }}">tags</a> </h6>
+            </div>
+          </div>
         {% for post in posts %}
         <div class="row">
             <div class="col-xs-12">
