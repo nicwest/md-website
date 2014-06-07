@@ -1,10 +1,17 @@
 import os
 from urlparse import urljoin
 from flask import Flask, render_template, Response, request, url_for
+from flask import send_from_directory
 from werkzeug.contrib.atom import AtomFeed
-from app import app
-from app import posts
+from app import app, cache, posts
 
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+@cache.cached(timeout=50)
 @app.route('/')
 def index():
     return render_template('index.html', posts=posts.posts)
@@ -13,6 +20,7 @@ def index():
 def cv_display_temp():
     return render_template('temp_cv.html')
 
+@cache.cached(timeout=50)
 @app.route('/<slug>')
 def view_post(slug):
     if slug in posts.slugs:
@@ -21,6 +29,7 @@ def view_post(slug):
         return render_template('post.html', post=post)
     return render_template('404.html')
 
+@cache.cached(timeout=50)
 @app.route('/<slug>/md')
 def view_markdown(slug):
     if slug in posts.slugs:
@@ -28,6 +37,7 @@ def view_markdown(slug):
         content = open(post.base_path, 'r').read()
         return Response(content, mimetype="text/x-markdown")
 
+@cache.cached(timeout=50)
 @app.route('/recent.atom')
 def view_atom():
     feed = AtomFeed('Recent Articles',
@@ -42,12 +52,14 @@ def view_atom():
     resp = feed.get_response() 
     return resp
 
+@cache.cached(timeout=50)
 @app.route('/tags/')
 def view_tags():
     tags = [x for x in posts.tags.iteritems()]
     tags.sort(key=lambda x: x[0])
     return render_template('tags.html', tags=posts.tags.iteritems())
 
+@cache.cached(timeout=50)
 @app.route('/tags/<tag>')
 def view_tag(tag):
     return render_template('index.html', posts=posts.tags[tag]['posts'])

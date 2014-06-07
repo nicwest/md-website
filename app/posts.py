@@ -13,7 +13,6 @@ class Post(object):
     tags = None
     base_path = None
     
-    
     def __init__(self, slug, title, path, summary, date, tags=''):
         self.slug = slug
         self.title = title
@@ -43,21 +42,22 @@ class Post(object):
 
 #post list
 posts = [
-    Post('test', 'Test Post Please Ignore', 'test.md',
-         'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod' +
-         'tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At' +
-         'vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,' +
-         'no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-         '2014-06-05 20:48', tags='test, **things'),
-    #Post('hello-world', 'Hello World', 'hello-world.md', 'first!', '2014-06-06 20:22',
-    #     tags='blog, *me')
+    #Post('test', 'Test Post Please Ignore', 'test.md',
+    #     'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod' +
+    #     'tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At' +
+    #     'vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,' +
+    #     'no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+    #     '2014-06-05 20:48', tags='test, **things'),
+    Post('hello-world', 'Hello World', 'hello-world.md', 'first horrible post',
+         '2014-06-07 17:54', tags='blog, **me, **vim')
 ]
 
 posts.sort(key=lambda x: x.date, reverse=True)
 
-slugs = {x.slug: x for x in posts}
+slugs = {}
 tags = {}
 for post in posts:
+    slugs[post.slug] = post
     for tag in post.tags:
         strong = False
         if tag.startswith('**'):
