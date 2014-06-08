@@ -49,7 +49,7 @@ posts = [
     #     'no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     #     '2014-06-05 20:48', tags='test, **things'),
     Post('hello-world', 'Hello World', 'hello-world.md', 'first horrible post',
-         '2014-06-07 17:54', tags='blog, **me, **vim')
+         '2014-06-07 17:54', tags='blog, **me, **vim'),
 ]
 
 posts.sort(key=lambda x: x.date, reverse=True)

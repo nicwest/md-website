@@ -9,14 +9,14 @@
             <div class="col-xs-12">
               <h6 class="info"> <a href="{{ url_for('index') }}">posts</a> | <strong>tags</strong> </h6>
             </div>
-          </div>
-        
-      <h1>Tags</h1>
+        </div>
+          <div class="row" style="margin-top:7px;"> 
         {% for tag_name, tag in tags %}
         <div class="col-xs-6 col-sm-2 sans">
           {% if tag.strong %}<strong>{% endif %}<a href="{{url_for('view_tag', tag=tag_name)}}">{{tag_name}}</a>{% if tag.strong %}</strong>{% endif %}  
           </div>
         {% endfor %}
+          </div>
     </div>
 </div>
 
