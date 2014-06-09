@@ -49,15 +49,15 @@ def view_atom():
                  url=urljoin(request.url_root, url_for('view_post', slug=post.slug)),
                  updated=post.datetime,
                  published=post.datetime)
-    resp = feed.get_response() 
+    resp = feed.get_response()
     return resp
 
 @cache.cached(timeout=50)
 @app.route('/tags/')
 def view_tags():
-    tags = [x for x in posts.tags.iteritems()]
+    tags = [(x, y) for x, y in posts.tags.iteritems()]
     tags.sort(key=lambda x: x[0])
-    return render_template('tags.html', tags=posts.tags.iteritems())
+    return render_template('tags.html', tags=tags)
 
 @cache.cached(timeout=50)
 @app.route('/tags/<tag>')

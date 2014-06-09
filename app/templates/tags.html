@@ -11,9 +11,9 @@
             </div>
         </div>
           <div class="row" style="margin-top:7px;"> 
-        {% for tag_name, tag in tags %}
+        {% for link, tag in tags %}
         <div class="col-xs-6 col-sm-2 sans">
-          {% if tag.strong %}<strong>{% endif %}<a href="{{url_for('view_tag', tag=tag_name)}}">{{tag_name}}</a>{% if tag.strong %}</strong>{% endif %}  
+          {% if tag.strong %}<strong>{% endif %}<a href="{{url_for('view_tag', tag=link)}}">{{tag.name}}</a>{% if tag.strong %}</strong>{% endif %}  
           </div>
         {% endfor %}
           </div>

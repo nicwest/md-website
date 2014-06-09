@@ -7,8 +7,9 @@
     <div class="blog container">
       <h6 class="info"> posted: <strong>{{ post.date }}</strong> | <a href="{{ url_for('view_markdown', slug=post.slug) }}">MD</a> </h6>
       {{post.content|safe}}
-      <h6 class="info"> tags: <strong>{% for tag in post.clean_tags %}
-          <a href="{{ url_for('view_tag', tag=tag) }}">{{tag}}</a>{% if not loop.last %},{% endif %}
+      <h6 class="info"> tags: <strong>{% for tag_pair in post.clean_tags %}
+          {% set tag, link = tag_pair %}
+          <a href="{{ url_for('view_tag', tag=link) }}">{{tag}}</a>{% if not loop.last %},{% endif %}
         {% endfor %}</strong></h6>
     </div>
 </div>

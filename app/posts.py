@@ -1,4 +1,5 @@
 import os
+import re
 import datetime
 import markdown
 from app import app
@@ -34,7 +35,7 @@ class Post(object):
     @property
     def clean_tags(self):
         tags = self.tags
-        return [x.replace('*', '') for x in tags]
+        return [(x.replace('*', ''), re.sub('[^a-z0-9-]', '-', x.replace('*', ''))) for x in tags]
 
     @property
     def datetime (self):
@@ -45,11 +46,11 @@ posts = [
     #Post('test', 'Test Post Please Ignore', 'test.md', '',
     #     '2014-06-05 20:48', tags='test, **things'),
     Post('hello-world', 'Hello World', 'hello-world.md', 'first horrible post',
-         '2014-06-07 17:54', tags='blog, **me, **vim'),
+         '2014-06-07 17:54', tags='blog, me, **vim'),
     Post('highlight-pullrequest', 'Highlight.js Pull Request',
          'highlight-pullrequest.md',
          'A pull request to highlight.js and plans about pull requests in general',
-         '2014-06-09 11:22', tags='highlight.js, **pull request'),
+         '2014-06-09 11:22', tags='highlight.js, **pull request, blog'),
 ]
 
 posts.sort(key=lambda x: x.date, reverse=True)
@@ -63,10 +64,11 @@ for post in posts:
         if tag.startswith('**'):
             strong = True
             tag = tag[2:]
-        if tag not in tags:
-            tags[tag] = {'strong': False, 'posts': []}
-        if post not in tags[tag]:
-            tags[tag]['posts'].append(post)
+        link=re.sub(r'[^0-9a-z]', '-', tag)
+        if link not in tags:
+            tags[link] = {'strong': False, 'name': tag, 'posts': []}
+        if post not in tags[link]:
+            tags[link]['posts'].append(post)
         if strong:
-            tags[tag]['strong'] = True
+            tags[link]['strong'] = True
 
