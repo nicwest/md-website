@@ -173,6 +173,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .blog code.hljs {display: block; overflow: auto; padding: 1em; margin: 0 auto; font-size: 90%}
 .blog code {display: inline-block; background: #1d1f21; color: #fff; font-size: 80%}
 
-.blog img {max-width: 100%}
+.blog img {max-width: 100%; border-radius: 4px;}
 .blog .sans {font-family: 'FF-ENZO-WEB'}
 .v-center {text-align: center;}
