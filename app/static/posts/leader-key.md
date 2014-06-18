@@ -51,7 +51,7 @@ nnoremap <leader>m zm
 ```
 
 Folds are super cool in terms of vim navigation, these are my most common
-actions, `za` toggles the current folder under cursor, `zr` reduces the folding
+actions, `za` toggles the current fold under cursor, `zr` reduces the folding
 (adds to `foldlevel`), and `zm` folds more (subtracts from `foldlevel`). I used
 to just fold/unfold all, but this gives more control.
 
@@ -63,9 +63,9 @@ nnoremap <leader>tf :Ag \(TODO\\|FIXME\)
 " quick fix
 nnoremap <silent> <leader>qo :copen<CR>
 nnoremap <silent> <leader>qq :cclose<CR>
-nnoremap <silent> <leader>qc :cex []<CR>
+nnoremap <silent> <leader>qc :cex []<CR> " clears quick fix
 ```
 
-Quick fix largely lives as my todo list. In combination with Ag this can be
-pretty powerful. I thinking about some exclusions however, as it can get a bit
+Quick fix largely lives as my todo list. In combination with [Ag](https://github.com/ggreer/the_silver_searcher) this can be
+pretty powerful. I'm thinking about some exclusions however, as it can get a bit
 polluted by third party libraries.
