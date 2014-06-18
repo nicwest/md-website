@@ -51,7 +51,9 @@ posts = [
          'highlight-pullrequest.md',
          'A pull request to highlight.js and plans about pull requests in general',
          '2014-06-09 11:22', tags='highlight.js, **pull request, blog'),
-]
+    Post('leader-key', 'Leader Key', 'leader-key.md', 'Leader key as spacebar' +
+         ' and why I use it for everything', '2014-06-18 00:38', tags='**vim'),
+    ]
 
 posts.sort(key=lambda x: x.date, reverse=True)
 
