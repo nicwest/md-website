@@ -53,6 +53,9 @@ posts = [
          '2014-06-09 11:22', tags='highlight.js, **pull request, blog'),
     Post('leader-key', 'Leader Key', 'leader-key.md', 'Leader key as spacebar' +
          ' and why I use it for everything', '2014-06-18 00:38', tags='**vim'),
+    Post('ergodox-source-build-eu', 'Ergodox keyboard, sourcing and building '+
+         ' in Europe', 'ergodox-source-and-build.md', 'A quick overview of my' +
+         'experience sourcing and', '2014-06-18 00:38', tags='**vim'),
     ]
 
 posts.sort(key=lambda x: x.date, reverse=True)
