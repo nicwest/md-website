@@ -56,6 +56,9 @@ posts = [
     Post('vim-filter-list-by-list', 'Vim: filter list by list',
          'vim-filter-list-by-list.md', 'How to filter a list by a list in vim',
          '2014-07-06 01:41', tags='**vim, **pull request'),
+    Post('using-ex-mode-as-a-repl-for-vimscript', 'Using Ex mode as a REPL ' +
+         'for vimscript', 'exmode-repl.md', 'Finally found a use for Ex mode ' +
+         'in vim! it still counts right?', '2014-08-24 01:08', tags='**vim'),
     ]
 
 posts.sort(key=lambda x: x.date, reverse=True)
