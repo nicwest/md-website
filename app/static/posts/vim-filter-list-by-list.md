@@ -10,7 +10,7 @@ wanted to exclude. Here's a simplified example:
 ```vim
 let colours = ["red", "green", "black", "brown", "blue", "white", "grey"]
 let monochrome = ["black", "white", "grey"]
-let colours_no_monochrome = filter(colours, "index(no_legs, v:val) < 0")
+let colours_no_monochrome = filter(colours, "index(monochrome, v:val) < 0")
 " ["red", "green", "brown", "blue"]
 ``` 
 
