@@ -26,7 +26,8 @@ class Post(object):
 
     def make_html(self):
         self.content = markdown.markdown(
-            open(self.base_path).read(), extensions=['fenced_code', 'headerid'])
+            open(self.base_path).read(),
+            extensions=['fenced_code', 'headerid', 'app.lib.grid_tables'])
 
     @property
     def tags(self):
@@ -59,6 +60,14 @@ posts = [
     Post('using-ex-mode-as-a-repl-for-vimscript', 'Using Ex mode as a REPL ' +
          'for vimscript', 'exmode-repl.md', 'Finally found a use for Ex mode ' +
          'in vim! it still counts right?', '2014-08-24 01:08', tags='**vim'),
+    Post(
+        'base64-encoding-in-vimscript',
+        'Base64 Encoding in Vimscript',
+        'base64-vimscript.md',
+        'How to base64 encode a string in vimscript',
+        '2014-10-16 21:43',
+        tags='**vim, base64, binary'
+    ),
     ]
 
 posts.sort(key=lambda x: x.date, reverse=True)

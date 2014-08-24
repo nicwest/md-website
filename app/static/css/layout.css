@@ -176,3 +176,31 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .blog img {max-width: 100%; border-radius: 4px;}
 .blog .sans {font-family: 'FF-ENZO-WEB'}
 .v-center {text-align: center;}
+
+.md-grid-table {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #FFF;
+  text-align: center;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 12px;
+  background: #1d1f21;
+  color: #FFF;
+  overflow: hidden;
+  margin-bottom: 1.5em;
+}
+
+.md-grid-table p {
+  text-align: center;
+  height: 100%;
+  margin: 0;
+  padding: 3px;
+}
+
+.md-grid-table th {
+  color: #81a2be;
+}
+
+.md-grid-table th, .md-grid-table td {
+  border: 1px solid #FFF;
+}
